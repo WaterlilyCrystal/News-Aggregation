@@ -1,65 +1,86 @@
 package CrawlingData;
 
 public class Data {
-    private String url;
-    private String site;
+    private String link;
+    private String sourceWebsite;
+    private String website;
     private String title;
     private String description;
     private String author;
-    private String publicationDate;
+    private String publishedDate;
     private String type;
-    private String imageLink;
-    private String webLink;
 
-    public String getWebLink() {
-        return webLink;
+    public String getLink() {
+        return this.link;
     }
 
-    public String getSite() {
-        return site;
+    public void setLink(String link) {
+        this.link = link;
     }
 
-    public String getUrl() {
-        return url;
+    public String getSourceWebsite() {
+        return this.sourceWebsite;
+    }
+
+    public void setSourceWebsite(String sourceWebsite) {
+        this.sourceWebsite = sourceWebsite;
+    }
+
+    public String getWebsite() {
+        return this.website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getAuthor() {
-        return author;
+        return this.author;
     }
 
-    public String getPublicationDate() {
-        return publicationDate;
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getPublishedDate() {
+        return this.publishedDate;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 
-    public String getImageLink() {
-        return imageLink;
-    }
-
-    public Data(String url, String site, String webLink, String title, String description, String author, String publicationDate, String type, String imageLink) {
-        this.url = url;
-        this.site = site;
-        this.webLink=webLink;
-        this.title = title;
-        this.description = description;
-        this.author = author;
-        this.publicationDate = publicationDate;
+    public void setType(String type) {
         this.type = type;
-        this.imageLink = imageLink;
-    }  //constructor
-
-    public String toCsvFormat() {
-        return String.format("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"\n", url, site, title, description, author, publicationDate, type, imageLink);
     }
+
+    public String getImage() {
+        return this.image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    private String image;
 }
+
