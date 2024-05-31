@@ -1,4 +1,4 @@
-package CrawlingData;
+package crawlingdata;
 
 public class Data {
     private String link;
@@ -9,6 +9,11 @@ public class Data {
     private String author;
     private String publishedDate;
     private String type;
+    private String image;
+
+    public Data() {
+
+    }
 
     public String getLink() {
         return this.link;
@@ -81,6 +86,21 @@ public class Data {
     public void setImage(String image) {
         this.image = image;
     }
-    private String image;
+
+    public Data(String link, String sourceWebsite, String website, String title, String description, String author, String publishedDate, String type, String image) {
+        this.link = link;
+        this.sourceWebsite = sourceWebsite;
+        this.website = website;
+        this.title = title;
+        this.description = description;
+        this.author = author;
+        this.publishedDate = publishedDate;
+        this.type = type;
+        this.image = image;
+    }
+
+    public String toCsvFormat() {
+        return String.format("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"\n", link, sourceWebsite, website, title, description, author, publishedDate, type, image);
+    }
 }
 
