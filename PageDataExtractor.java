@@ -1,4 +1,4 @@
-package CrawlingData;
+package crawlingdata;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,10 +10,12 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public abstract class PageDataExtractor {
+    protected String[] motherUrls;
+
     public abstract Data extractPageData(String url, Document document) throws IOException;
 
     public Set<Data> scrapePages() {
-        Set<Data> articles = new HashSet<>();
+        Set<Data> dataset = new HashSet<>();
 
         try {
             String[] motherUrls = getMotherUrls();
@@ -24,10 +26,10 @@ public abstract class PageDataExtractor {
                 for (Element link : links) {
                     String childUrl = link.absUrl("href");
                     Document childDoc = Jsoup.connect(childUrl).get();
-                    Data article = extractPageData(childUrl, childDoc);
+                    Data data = extractPageData(childUrl, childDoc);
 
-                    if (article != null) {
-                        articles.add(article);
+                    if (data != null) {
+                        dataset.add(data);
                         // Delay before scraping next page to avoid overloading server
                         TimeUnit.MILLISECONDS.sleep(1000); // 1 second delay
                     }
@@ -37,8 +39,15 @@ public abstract class PageDataExtractor {
             e.printStackTrace();
         }
 
-        return articles;
+        return dataset;
     }
 
-    protected abstract String[] getMotherUrls();
+    public PageDataExtractor(String[] motherUrls) {
+        this.motherUrls = motherUrls;
+    }
+
+    protected String[] getMotherUrls() {
+        return motherUrls;
+    }
 }
+
