@@ -10,10 +10,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class WebScraper2 extends PageDataExtractor {
-    private String[] motherUrls;
-
     public WebScraper2(String[] motherUrls) {
-        this.motherUrls = motherUrls;
+        super(motherUrls);
     }
 
     @Override
@@ -25,20 +23,17 @@ public class WebScraper2 extends PageDataExtractor {
             for (String motherUrl : motherUrls) {
                 Set<String> childUrls = new HashSet<>(); // Initialize for each mother page
 
-
                 boolean hasNextPage = true;
                 while (hasNextPage) {
                     Document motherDoc = Jsoup.connect(motherUrl)
                             .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36")
                             .get();
 
-
                     Elements articleLinks = motherDoc.select("a[itemprop=url][data-test=title-link]");
                     for (Element link : articleLinks) {
                         String childUrl = link.attr("abs:href");
                         childUrls.add(childUrl);
                     }
-
 
                     Elements nextElements = motherDoc.select("a.c-pagination__link[rel=next]");
                     if (!nextElements.isEmpty()) {
@@ -81,18 +76,12 @@ public class WebScraper2 extends PageDataExtractor {
         return new Data(url, site, webLink, title, description, author, publicationDate, type, imageLink);
     }
 
-    @Override
-    protected String[] getMotherUrls() {
-        return motherUrls;
-    }
-
     public static void main(String[] args) {
-        // Define motherUrls for WebScraper1
         String[] motherUrls = {
                 "https://www.springeropen.com/search?query=blockchain&searchType=publisherSearch"
         };
 
-        // Instantiate WebScraper2 with motherUrls
+        // Instantiate WebScraper2
         WebScraper2 webScraper = new WebScraper2(motherUrls);
 
         // Scrape web pages
