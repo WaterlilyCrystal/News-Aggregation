@@ -4,17 +4,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class WebScraper3 extends PageDataExtractor {
-    private String[] motherUrls;
-
     public WebScraper3(String[] motherUrls) {
-        this.motherUrls = motherUrls;
+        super(motherUrls);
     }
 
     @Override
@@ -66,8 +63,6 @@ public class WebScraper3 extends PageDataExtractor {
         return articles;
     }
 
-
-
     @Override
     public Data extractPageData(String url, Document document) throws IOException {
         final String site = "Consumer News and Business Channel";
@@ -81,18 +76,13 @@ public class WebScraper3 extends PageDataExtractor {
         return new Data(url, site, webLink, title, description, author, publicationDate, type, imageLink);
     }
 
-    @Override
-    protected String[] getMotherUrls() {
-        return motherUrls;
-    }
 
     public static void main(String[] args) {
-        // Define motherUrls for WebScraper1
         String[] motherUrls = {
                 "https://www.cnbc.com/blockchain/"
         };
 
-        // Instantiate WebScraper3 with motherUrls
+        // Instantiate WebScraper3 
         WebScraper3 webScraper = new WebScraper3(motherUrls);
 
         // Scrape web pages
