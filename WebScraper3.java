@@ -79,7 +79,9 @@ public class WebScraper3 extends PageDataExtractor {
 
     public static void main(String[] args) {
         String[] motherUrls = {
-                "https://www.cnbc.com/blockchain/"
+                "https://www.cnbc.com/blockchain/","https://www.scmp.com/topics/blockchain",
+                "https://www.forbes.com/digital-assets/news", "https://blockworks.co/",
+                "https://www.the-blockchain.com/","https://shardeum.org/blog/"
         };
 
         // Instantiate WebScraper3 
